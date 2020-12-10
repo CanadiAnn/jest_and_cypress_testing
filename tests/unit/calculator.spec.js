@@ -50,48 +50,17 @@ it('should concatenate multiple number button clicks', () => {
 
 it('should chain multiple operations together', () => {
   const wrapper = shallowMount(App)
+  wrapper.vm.runningTotal = 4
   wrapper.vm.previousTotal = 8
-  wrapper.vm.previousOperator = "-"
-  wrapper.vm.numberClick('1')
-  expect(wrapper.vm.runningTotal).to.equal(7)
+  wrapper.vm.operatorClick('-')
+  expect(wrapper.vm.runningTotal).to.equal(4)
 });
 
+it('clear the running total without affecting the calculation', () => {
+  const wrapper = shallowMount(App)
+  wrapper.vm.runningTotal = 4
+  wrapper.vm.previousOperator = "-"
+  wrapper.vm.clearClick('=')
+  expect(wrapper.vm.runningTotal).to.equal(0)
+});
 
-
-
-// operatorClick: function (operator) {
-//   // if there was a previous operator recorded as having been clicked, perform
-//   // the operation for the previous operator
-//   if (this.previousTotal && this.previousOperator) {
-//     switch (this.previousOperator) {
-//       case "+":
-//         this.add(this.runningTotal);
-//         break;
-//       case "-":
-//         this.subtract(this.runningTotal);
-//         break;
-//       case "*":
-//         this.multiply(this.runningTotal);
-//         break;
-//       case "/":
-//         this.divide(this.runningTotal);
-//         break;
-//     }
-//   }
-
-
-
-// TEST UNITS
-//
-// - `add()` - add 1 to 4 and get 5 (Done)
-// - `subtract()` subtract 4 from 7 and get 3 (Done)
-// - `multiply()` - multiply 3 by 5 and get 15 (Done)
-// - `divide()` - divide 21 by 7 and get 3 (Done)
-// - `numberClick()` - concatenate multiple number button clicks (Done)
-// - `operatorClick()` - chain multiple operations together
-// - `clearClick()` - clear the running total without affecting the calculation
-
-// FROM NOTES
-// toBe() Checks equality of a return value
-// toHaveLength() Checks array lengths
-// toMatch() Checks for string equality
